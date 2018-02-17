@@ -10,6 +10,7 @@ echo "Using tag $TAG"
 if [ "$1" == "build" ]; then
   echo "Building image: $DOCKERHUB_NAME:$TAG"
   docker build -t $DOCKERHUB_NAME:$TAG $PATH2DOCKERFILE
+  
 
 elif [ "$1" == "rstudio" ]; then
   docker rm $(docker ps -q -f status=exited)
@@ -20,5 +21,8 @@ elif [ "$1" == "stop" ]; then
 
 docker stop $LOCAL_IMG_NAME
 docker rm $(docker ps -q -f status=exited)
-  
+
+elif [ "$1" == "test" ]; then
+  docker exec -it rstudio_rocker_selenium Rscript "/src/tests/test_shiny-server.R"
+
 fi

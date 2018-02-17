@@ -22,19 +22,9 @@ test_that("Shiny Server is working", {
   
   remDr$screenshot(file = snapshotPath)
   
-  expect_true(file.exists("./tests/test_shiny-server-ref.png"))
+  expect_true(file.exists("/src/tests/test_shiny-server-ref.png"))
   
   expect_identical(png::readPNG(snapshotPath),
-                   png::readPNG("./tests/test_shiny-server-ref.png"))
-  
-  # tryCatch({
-  #   expect_identical(png::readPNG(snapshotPath),
-  #                    png::readPNG("./tests/test_shiny-server-ref.png"))
-  # }, error = function(e) {
-  #   try(dir.create("./tests/refs"))
-  #   file.copy(snapshotPath, "./tests/refs")
-  # })
-  
-  
+                   png::readPNG("/src/tests/test_shiny-server-ref.png"))
 })
 
