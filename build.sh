@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export PATH2DOCKERFILE=./
-export DOCKERHUB_NAME=tazovsky/rocker-standalone-chrome
+export DOCKERHUB_NAME=tazovsky/rockium
 export LOCAL_IMG_NAME=rstudio_rocker_selenium
 
 export TAG=0.1.0
