@@ -288,3 +288,10 @@ CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 COPY install_libraries.R /code/install_libraries.R
 RUN R -f /code/install_libraries.R
 
+#======== run tests
+COPY tests/ /opt/bin/tests
+
+#ENTRYPOINT ["Rscript", "-e", "testthat::test_file('/opt/bin/tests/test_shiny-server.R')"]
+
+
+
