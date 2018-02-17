@@ -4,6 +4,10 @@
 
 One Docker image containing Rstudio Server, Shiny Server and Selenium Server. 
 
+### Dockerhub
+
+Image can be found on my dockerhub: https://hub.docker.com/r/tazovsky/rockium/
+
 ### Why I did not use `docker-compose`?
 
 The problem I encountered was requirement of deployment app in one and only one container. 
