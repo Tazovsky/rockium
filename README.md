@@ -6,7 +6,7 @@ One Docker image containing Rstudio Server, Shiny Server and Selenium Server.
 
 ### Why I did not use `docker-compose`?
 
-The problem that I encountered was requirement of deployment app in one and only container. 
+The problem I encountered was requirement of deployment app in one and only one container. 
 So the simplest solution was creating one container insted of using `docker-compose` with `rocker` and `selenium server`.
 
 
