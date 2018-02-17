@@ -5,13 +5,17 @@ library(png)
 test_that("Shiny Server is working", {
   dir.create(tmpDir <- tempfile())
   on.exit(unlink(tmpDir, TRUE, TRUE))
+  
+  url <- "http://localhost:3838/"
+  
   remDr <- remoteDriver(remoteServerAddr = "localhost",
                         port = 4444,
                         browserName = "chrome")
+
+  on.exit(remDr$closeall())
   
   remDr$open(silent = TRUE)
-  on.exit(remDr$closeall())
-  url <- "http://localhost:3838/"
+  
   remDr$navigate(url)
   
   Sys.sleep(2)
@@ -22,9 +26,9 @@ test_that("Shiny Server is working", {
   
   remDr$screenshot(file = snapshotPath)
   
-  expect_true(file.exists("/src/tests/test_shiny-server-ref.png"))
+  expect_true(file.exists("test_shiny-server-ref.png"))
   
   expect_identical(png::readPNG(snapshotPath),
-                   png::readPNG("/src/tests/test_shiny-server-ref.png"))
+                   png::readPNG("test_shiny-server-ref.png"))
 })
 
