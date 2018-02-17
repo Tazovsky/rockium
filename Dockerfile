@@ -121,9 +121,6 @@ USER seluser
 #==============================
 # Scripts to run Selenium Node
 #==============================
-#COPY NodeBase/entry_point.sh \
-#  functions.sh \
-#    /opt/bin/
 
 COPY NodeBase/entry_point.sh /opt/bin/
 COPY NodeBase/functions.sh /opt/bin/
@@ -228,7 +225,9 @@ COPY StandaloneChrome/entry_point.sh /opt/bin/entry_point.sh
 
 EXPOSE 4444
 
-#==================================== Shiny Server
+#===================================================
+#========= Shiny Server
+#===================================================
 
 USER root
 
@@ -251,7 +250,9 @@ RUN apt-get update && apt-get install -y \
     rm -rf /var/lib/apt/lists/*
 
 
-#==================================== shiny server + rstudio = 1 container
+#===================================================
+#========= Shiny Server and Rstudio in 1 container
+#===================================================
 # sources:
 # https://stackoverflow.com/questions/29212887/rstudio-and-shiny-in-one-dockerfile
 # https://github.com/smartinsightsfromdata/Docker-for-shiny-server-free-edition-on-centos
@@ -291,7 +292,6 @@ RUN R -f /code/install_libraries.R
 #======== run tests
 COPY tests/ /opt/bin/tests
 
-#ENTRYPOINT ["Rscript", "-e", "testthat::test_file('/opt/bin/tests/test_shiny-server.R')"]
 
 
 
