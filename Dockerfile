@@ -240,7 +240,11 @@ RUN x11vnc -storepasswd 'secret' $VNC_PASSWD_FILE
 
 COPY rplatform/StandaloneChromeDebug/entry_point.sh /opt/bin/entry_point.sh
 
+CMD ["/opt/bin/entry_point.sh"]
+
 EXPOSE 4444 5900
+
+#============ Supervisor
 
 RUN apt-get update -y && apt-get install -y \
     openssl \
