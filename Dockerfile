@@ -240,8 +240,6 @@ RUN x11vnc -storepasswd 'secret' $VNC_PASSWD_FILE
 
 COPY rplatform/StandaloneChromeDebug/entry_point.sh /opt/bin/entry_point.sh
 
-CMD ["/opt/bin/entry_point.sh"]
-
 EXPOSE 4444 5900
 
 #============ Supervisor
@@ -251,8 +249,15 @@ RUN apt-get update -y && apt-get install -y \
     supervisor \
     passwd
     
-#COPY rplatform/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-#RUN mkdir -p /var/log/supervisor && chmod 777 -R /var/log/supervisor
-#CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+COPY rplatform/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN mkdir -p /var/log/supervisor && chmod 777 -R /var/log/supervisor
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 
-CMD ["/init"]
+#==================== Set permissions
+
+USER root
+#RUN sudo echo 'server-user=rstudio' >> /etc/rstudio/rserver.conf
+RUN usermod -a -G sudo rstudio
+RUN usermod -a -G staff shiny
+# add write permission to directories containing user annotations
+RUN chmod g+rwxs -R /usr/local/lib/R/site-library

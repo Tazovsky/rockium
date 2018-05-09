@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export IMAGE_NAME_RSTUDIO=geneapps/rp_rstudio_shiny_selenium:0.1.0
+export IMAGE_NAME_RSTUDIO=geneapps/rp_rstudio_shiny_selenium:0.2.0
 export COMPOSE=docker-compose.yml
 export RSTUDIO=rp-rstudio-shiny
 export CORE_DIR="/mnt/vol"
